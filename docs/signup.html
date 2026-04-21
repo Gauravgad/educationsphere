@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sign Up — EduSphere | Start Learning Free</title>
+<meta name="description" content="Create your free EduSphere account and unlock 500+ expert-led courses today."/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="auth-page">
+  <aside class="auth-visual">
+    <div class="auth-visual-inner">
+      <div style="font-size:32px;margin-bottom:24px;">🎓 <strong>EduSphere</strong></div>
+      <h1>Start your learning adventure today!</h1>
+      <p>Create your free account and join thousands of learners building skills for tomorrow's careers.</p>
+      <div class="auth-features">
+        <div><span class="check">✓</span> 100% free signup, no credit card needed</div>
+        <div><span class="check">✓</span> Personalized learning roadmap</div>
+        <div><span class="check">✓</span> Hands-on projects & quizzes</div>
+        <div><span class="check">✓</span> Lifetime access to enrolled courses</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="auth-form-side">
+    <div class="auth-form-wrap">
+      <div class="auth-brand">
+        <div class="brand-logo">E</div> EduSphere
+      </div>
+      <h2>Create your account</h2>
+      <p class="sub">Free forever. Start in less than 60 seconds.</p>
+
+      <div class="alert alert-error" id="alert"></div>
+
+      <form id="signupForm" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="John" required/>
+            <div class="err">Required.</div>
+          </div>
+          <div class="field">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Doe" required/>
+            <div class="err">Required.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com" required/>
+          <div class="err">Please enter a valid email.</div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="At least 6 characters" required/>
+          <div class="err">Password must be at least 6 characters.</div>
+        </div>
+
+        <div class="field">
+          <label for="confirm">Confirm Password</label>
+          <input type="password" id="confirm" placeholder="Re-enter password" required/>
+          <div class="err">Passwords do not match.</div>
+        </div>
+
+        <div style="margin:8px 0 18px;font-size:14px;display:flex;gap:8px;align-items:flex-start;color:#6b7280;">
+          <input type="checkbox" id="terms" required style="margin-top:4px;"/>
+          <label for="terms">I agree to the <a href="#" style="color:var(--primary);font-weight:600;">Terms of Service</a> and <a href="#" style="color:var(--primary);font-weight:600;">Privacy Policy</a></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Create Account →</button>
+      </form>
+
+      <p class="auth-switch">Already have an account? <a href="login.html">Sign in</a></p>
+    </div>
+  </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script>
+  if (Auth.getSession()) window.location.href = 'index.html';
+
+  const form = document.getElementById('signupForm');
+  const fn = document.getElementById('firstName');
+  const ln = document.getElementById('lastName');
+  const em = document.getElementById('email');
+  const pw = document.getElementById('password');
+  const cf = document.getElementById('confirm');
+  const tm = document.getElementById('terms');
+  const alertBox = document.getElementById('alert');
+
+  function setErr(el, msg) {
+    el.parentElement.classList.add('has-error');
+    if (msg) el.parentElement.querySelector('.err').textContent = msg;
+  }
+  function clear() {
+    document.querySelectorAll('.field').forEach(f => f.classList.remove('has-error'));
+    alertBox.classList.remove('show');
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    clear();
+    let ok = true;
+    if (!fn.value.trim()) { setErr(fn); ok = false; }
+    if (!ln.value.trim()) { setErr(ln); ok = false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)) { setErr(em); ok = false; }
+    if (pw.value.length < 6) { setErr(pw); ok = false; }
+    if (cf.value !== pw.value) { setErr(cf); ok = false; }
+    if (!tm.checked) {
+      alertBox.textContent = 'Please accept the Terms of Service to continue.';
+      alertBox.classList.add('show'); ok = false;
+    }
+    if (!ok) return;
+
+    const res = Auth.signup({
+      firstName: fn.value, lastName: ln.value,
+      email: em.value, password: pw.value
+    });
+    if (!res.ok) {
+      alertBox.textContent = res.error;
+      alertBox.classList.add('show'); return;
+    }
+    // Signup successful — redirect to home
+    window.location.href = 'index.html';
+  });
+</script>
+</body>
+</html>

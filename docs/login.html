@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Login — EduSphere | E-Learning Platform</title>
+<meta name="description" content="Login to EduSphere e-learning platform and continue your learning journey."/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="auth-page">
+  <!-- Visual side -->
+  <aside class="auth-visual">
+    <div class="auth-visual-inner">
+      <div style="font-size:32px;margin-bottom:24px;">🎓 <strong>EduSphere</strong></div>
+      <h1>Welcome back to your learning journey!</h1>
+      <p>Continue mastering new skills with thousands of expert-led courses, projects, and certifications.</p>
+      <div class="auth-features">
+        <div><span class="check">✓</span> Access 500+ premium courses</div>
+        <div><span class="check">✓</span> Learn from industry experts</div>
+        <div><span class="check">✓</span> Earn verified certificates</div>
+        <div><span class="check">✓</span> Join 50,000+ learners worldwide</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Form side -->
+  <main class="auth-form-side">
+    <div class="auth-form-wrap">
+      <div class="auth-brand">
+        <div class="brand-logo">E</div> EduSphere
+      </div>
+      <h2>Sign in to your account</h2>
+      <p class="sub">Enter your credentials to access your dashboard</p>
+
+      <div class="alert alert-error" id="alert"></div>
+      <div class="alert alert-success" id="alertOk"></div>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com" required/>
+          <div class="err">Please enter a valid email.</div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required/>
+          <div class="err">Password must be at least 6 characters.</div>
+        </div>
+
+        <div class="auth-extra">
+          <label style="display:flex;gap:6px;align-items:center;cursor:pointer;">
+            <input type="checkbox"/> Remember me
+          </label>
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Sign In →</button>
+      </form>
+
+      <p class="auth-switch">Don't have an account? <a href="signup.html">Sign up free</a></p>
+    </div>
+  </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script>
+  // If already logged in, skip to home
+  if (Auth.getSession()) window.location.href = 'index.html';
+
+  const form = document.getElementById('loginForm');
+  const emailF = document.getElementById('email');
+  const passF = document.getElementById('password');
+  const alertBox = document.getElementById('alert');
+  const alertOk = document.getElementById('alertOk');
+
+  function setError(el, msg) {
+    el.parentElement.classList.add('has-error');
+    if (msg) el.parentElement.querySelector('.err').textContent = msg;
+  }
+  function clearErrors() {
+    document.querySelectorAll('.field').forEach(f => f.classList.remove('has-error'));
+    alertBox.classList.remove('show');
+    alertOk.classList.remove('show');
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    clearErrors();
+    let ok = true;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailF.value)) { setError(emailF); ok = false; }
+    if (passF.value.length < 6) { setError(passF); ok = false; }
+    if (!ok) return;
+
+    const res = Auth.login(emailF.value, passF.value);
+    if (!res.ok) {
+      alertBox.textContent = res.error;
+      alertBox.classList.add('show');
+      return;
+    }
+    alertOk.textContent = `Welcome back, ${res.user.firstName}! Redirecting...`;
+    alertOk.classList.add('show');
+    setTimeout(() => window.location.href = 'index.html', 800);
+  });
+</script>
+</body>
+</html>

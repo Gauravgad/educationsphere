@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Learning — EduSphere | Browse 500+ Courses</title>
+<meta name="description" content="Browse our complete catalog of online courses across 8 categories. Find your next learning adventure on EduSphere."/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-wrap">
+    <a href="index.html" class="brand"><span class="brand-logo">E</span> EduSphere</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="learning.html" class="active">Learning</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div id="userSlot"></div>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="learning-hero">
+  <div class="container">
+    <h1>Discover your next skill 📚</h1>
+    <p>Explore 500+ courses across 8 categories taught by world-class instructors.</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search courses, topics, instructors..."/>
+      <button onclick="filterCourses()">🔍 Search</button>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- MY LEARNING (enrolled) -->
+  <section class="my-learning" id="myLearning">
+    <h2>📖 My Learning</h2>
+    <p>Pick up where you left off</p>
+    <div class="enrolled-list" id="enrolledList"></div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section style="margin-bottom:40px;">
+    <div class="section-head" style="margin-bottom:30px;text-align:left;">
+      <h2 style="font-size:28px;">Browse by category</h2>
+      <p>Find your perfect learning path</p>
+    </div>
+    <div class="cats-grid" id="catsGrid">
+      <div class="cat-pill active" data-cat="all"><span class="ic">🌟</span><strong>All</strong><span>500+ courses</span></div>
+      <div class="cat-pill" data-cat="web"><span class="ic">💻</span><strong>Web Dev</strong><span>120 courses</span></div>
+      <div class="cat-pill" data-cat="data"><span class="ic">📊</span><strong>Data Science</strong><span>85 courses</span></div>
+      <div class="cat-pill" data-cat="design"><span class="ic">🎨</span><strong>Design</strong><span>60 courses</span></div>
+      <div class="cat-pill" data-cat="ai"><span class="ic">🤖</span><strong>AI / ML</strong><span>45 courses</span></div>
+      <div class="cat-pill" data-cat="mobile"><span class="ic">📱</span><strong>Mobile</strong><span>50 courses</span></div>
+      <div class="cat-pill" data-cat="business"><span class="ic">💼</span><strong>Business</strong><span>70 courses</span></div>
+      <div class="cat-pill" data-cat="lang"><span class="ic">🗣️</span><strong>Languages</strong><span>40 courses</span></div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-head" style="text-align:left;margin-bottom:30px;">
+      <h2 style="font-size:28px;" id="catTitle">All Courses</h2>
+      <p id="catCount">Showing all courses</p>
+    </div>
+    <div class="courses-grid" id="coursesGrid"></div>
+    <div id="noResults" style="display:none;text-align:center;padding:60px;color:var(--gray-500);">
+      <div style="font-size:60px;margin-bottom:14px;">🔍</div>
+      <h3 style="margin-bottom:8px;">No courses found</h3>
+      <p>Try a different search or category</p>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="color:white;"><span class="brand-logo">E</span> EduSphere</div>
+        <p>Empowering learners worldwide to master in-demand skills.</p>
+      </div>
+      <div><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="learning.html">Learning</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Categories</h4><ul><li><a href="#">Web Dev</a></li><li><a href="#">Data Science</a></li><li><a href="#">Design</a></li></ul></div>
+      <div><h4>Support</h4><ul><li><a href="contact.html">Help Center</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">© 2025 EduSphere. Built for BCA Project. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="js/auth.js"></script>
+<script>Auth.requireAuth();</script>
+<script>
+  // ===== Course Data =====
+  const COURSES = [
+    {id:1, cat:'web', title:'Modern JavaScript Mastery', desc:'From fundamentals to ES2024 — build real projects.', price:'₹1,499', rating:4.9, lessons:42, badge:'BESTSELLER', icon:'JS', grad:'linear-gradient(135deg,#4f46e5,#06b6d4)'},
+    {id:2, cat:'web', title:'React.js Complete Guide', desc:'Master React, hooks, Redux & Next.js fundamentals.', price:'₹1,999', rating:4.8, lessons:65, badge:'POPULAR', icon:'⚛️', grad:'linear-gradient(135deg,#06b6d4,#3b82f6)'},
+    {id:3, cat:'web', title:'HTML & CSS from Zero', desc:'Build beautiful responsive websites from scratch.', price:'FREE', rating:4.7, lessons:30, badge:'FREE', icon:'</>', grad:'linear-gradient(135deg,#f59e0b,#ef4444)'},
+    {id:4, cat:'data', title:'Python for Data Science', desc:'Pandas, NumPy, Matplotlib — analyze data like a pro.', price:'₹1,999', rating:4.8, lessons:56, badge:'NEW', icon:'PY', grad:'linear-gradient(135deg,#f59e0b,#ef4444)'},
+    {id:5, cat:'data', title:'SQL & Database Mastery', desc:'Query databases like a pro. MySQL, PostgreSQL covered.', price:'₹999', rating:4.6, lessons:35, badge:'HOT 🔥', icon:'DB', grad:'linear-gradient(135deg,#10b981,#06b6d4)'},
+    {id:6, cat:'design', title:'UI/UX Design Bootcamp', desc:'Master Figma, design systems & user research.', price:'₹2,499', rating:4.9, lessons:38, badge:'BESTSELLER', icon:'UX', grad:'linear-gradient(135deg,#10b981,#06b6d4)'},
+    {id:7, cat:'design', title:'Graphic Design Essentials', desc:'Photoshop, Illustrator, branding fundamentals.', price:'₹1,499', rating:4.5, lessons:42, badge:'NEW', icon:'🎨', grad:'linear-gradient(135deg,#ec4899,#8b5cf6)'},
+    {id:8, cat:'ai', title:'Intro to Machine Learning', desc:'Understand AI, neural networks & build your first model.', price:'FREE', rating:4.7, lessons:28, badge:'FREE', icon:'AI', grad:'linear-gradient(135deg,#8b5cf6,#ec4899)'},
+    {id:9, cat:'ai', title:'Deep Learning with TensorFlow', desc:'Build CNNs, RNNs and real neural networks.', price:'₹3,499', rating:4.8, lessons:72, badge:'ADVANCED', icon:'🧠', grad:'linear-gradient(135deg,#6366f1,#8b5cf6)'},
+    {id:10, cat:'mobile', title:'Flutter App Development', desc:'Build cross-platform iOS & Android apps with Flutter.', price:'₹1,999', rating:4.7, lessons:48, badge:'POPULAR', icon:'📱', grad:'linear-gradient(135deg,#06b6d4,#3b82f6)'},
+    {id:11, cat:'mobile', title:'Android with Kotlin', desc:'Native Android development from beginner to advanced.', price:'₹1,799', rating:4.6, lessons:55, badge:'NEW', icon:'🤖', grad:'linear-gradient(135deg,#10b981,#059669)'},
+    {id:12, cat:'business', title:'Digital Marketing Mastery', desc:'SEO, ads, social media — grow any brand online.', price:'₹1,299', rating:4.7, lessons:40, badge:'HOT 🔥', icon:'📈', grad:'linear-gradient(135deg,#f59e0b,#ef4444)'},
+    {id:13, cat:'business', title:'Entrepreneurship 101', desc:'From idea to launch — start your own business.', price:'₹999', rating:4.5, lessons:32, badge:'NEW', icon:'💼', grad:'linear-gradient(135deg,#3b82f6,#6366f1)'},
+    {id:14, cat:'lang', title:'Spoken English Fluency', desc:'Speak English confidently in 30 days.', price:'₹799', rating:4.8, lessons:60, badge:'BESTSELLER', icon:'🇬🇧', grad:'linear-gradient(135deg,#ef4444,#f59e0b)'},
+    {id:15, cat:'lang', title:'Learn Spanish Basics', desc:'Conversational Spanish for travelers and beginners.', price:'₹699', rating:4.6, lessons:45, badge:'NEW', icon:'🇪🇸', grad:'linear-gradient(135deg,#dc2626,#f59e0b)'},
+    {id:16, cat:'web', title:'Node.js & Express Backend', desc:'Build REST APIs and full-stack apps.', price:'₹1,799', rating:4.7, lessons:50, badge:'POPULAR', icon:'⚙️', grad:'linear-gradient(135deg,#10b981,#06b6d4)'},
+  ];
+
+  // ===== Render enrolled (mocked: first 3 courses with random progress) =====
+  function renderEnrolled() {
+    const session = Auth.getSession();
+    const sample = COURSES.slice(0, 3).map((c, i) => ({
+      ...c, progress: [65, 30, 85][i]
+    }));
+    const html = sample.map(c => `
+      <div class="enrolled">
+        <div class="top">
+          <div class="ic" style="background:${c.grad};">${c.icon}</div>
+          <div>
+            <strong>${c.title}</strong>
+            <span>${c.lessons} lessons</span>
+          </div>
+        </div>
+        <div class="progress"><div class="progress-bar" style="width:${c.progress}%;"></div></div>
+        <span class="pct">${c.progress}% complete</span>
+      </div>
+    `).join('');
+    document.getElementById('enrolledList').innerHTML = html;
+  }
+
+  // ===== Render courses =====
+  let currentCat = 'all';
+  let currentSearch = '';
+
+  function renderCourses() {
+    let list = COURSES;
+    if (currentCat !== 'all') list = list.filter(c => c.cat === currentCat);
+    if (currentSearch) {
+      const s = currentSearch.toLowerCase();
+      list = list.filter(c => c.title.toLowerCase().includes(s) || c.desc.toLowerCase().includes(s));
+    }
+    const grid = document.getElementById('coursesGrid');
+    const empty = document.getElementById('noResults');
+    if (list.length === 0) {
+      grid.innerHTML = ''; empty.style.display = 'block';
+    } else {
+      empty.style.display = 'none';
+      grid.innerHTML = list.map(c => `
+        <div class="course-card">
+          <div class="course-thumb" style="background:${c.grad};">
+            <span class="badge">${c.badge}</span>${c.icon}
+          </div>
+          <div class="course-body">
+            <span class="course-cat">${catName(c.cat)}</span>
+            <h3>${c.title}</h3>
+            <p>${c.desc}</p>
+            <div class="course-meta">
+              <span>📺 ${c.lessons} lessons</span>
+              <span class="stars">★ ${c.rating}</span>
+              <span class="price" style="${c.price==='FREE'?'color:var(--success);':''}">${c.price}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    document.getElementById('catCount').textContent = `Showing ${list.length} course${list.length!==1?'s':''}`;
+  }
+
+  function catName(c) {
+    return ({web:'Web Development', data:'Data Science', design:'Design',
+             ai:'Artificial Intelligence', mobile:'Mobile', business:'Business',
+             lang:'Languages'})[c] || 'Course';
+  }
+
+  // Category clicks
+  document.querySelectorAll('.cat-pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.cat-pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      currentCat = p.dataset.cat;
+      document.getElementById('catTitle').textContent =
+        currentCat === 'all' ? 'All Courses' : catName(currentCat);
+      renderCourses();
+    });
+  });
+
+  // Search
+  function filterCourses() {
+    currentSearch = document.getElementById('searchInput').value.trim();
+    renderCourses();
+  }
+  document.getElementById('searchInput').addEventListener('input', filterCourses);
+
+  // Init
+  renderEnrolled();
+  renderCourses();
+</script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>
