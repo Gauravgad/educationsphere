@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contact Us — EduSphere | Get in Touch</title>
+<meta name="description" content="Have questions about our courses? Reach out to the EduSphere team — we typically reply within 24 hours."/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-wrap">
+    <a href="index.html" class="brand"><span class="brand-logo">E</span> EduSphere</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="learning.html">Learning</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div id="userSlot"></div>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">GET IN TOUCH</span>
+      <h2>We'd love to hear from you</h2>
+      <p>Got a question about a course, payment, or technical issue? Our team is here to help.</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Info card -->
+      <div class="contact-info-card">
+        <h3>Contact Information</h3>
+        <p>Reach out through any channel below — we respond within 24 hours.</p>
+
+        <div class="info-item">
+          <div class="ic">📧</div>
+          <div><strong>Email</strong><span>support@edusphere.com</span></div>
+        </div>
+        <div class="info-item">
+          <div class="ic">📞</div>
+          <div><strong>Phone</strong><span>+91 98765 43210</span></div>
+        </div>
+        <div class="info-item">
+          <div class="ic">📍</div>
+          <div><strong>Office</strong><span>123 Learning Lane, Bengaluru, India 560001</span></div>
+        </div>
+        <div class="info-item">
+          <div class="ic">🕒</div>
+          <div><strong>Hours</strong><span>Mon - Sat: 9:00 AM - 7:00 PM IST</span></div>
+        </div>
+
+        <div class="socials">
+          <a href="#" title="Twitter">𝕏</a>
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="LinkedIn">in</a>
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="YouTube">▶</a>
+        </div>
+      </div>
+
+      <!-- Form card -->
+      <div class="contact-form-card">
+        <h3>Send us a message</h3>
+        <p>Fill out the form below and we'll get back to you shortly.</p>
+
+        <div class="alert alert-success" id="okAlert">✅ Thank you! Your message has been sent successfully.</div>
+        <div class="alert alert-error" id="errAlert"></div>
+
+        <form id="contactForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="cName">Full Name</label>
+              <input type="text" id="cName" placeholder="John Doe" required/>
+              <div class="err">Please enter your name.</div>
+            </div>
+            <div class="field">
+              <label for="cEmail">Email</label>
+              <input type="email" id="cEmail" placeholder="you@example.com" required/>
+              <div class="err">Please enter a valid email.</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="cSubject">Subject</label>
+            <select id="cSubject" required>
+              <option value="">Select a topic...</option>
+              <option>General Inquiry</option>
+              <option>Course Question</option>
+              <option>Payment / Billing</option>
+              <option>Technical Support</option>
+              <option>Partnership</option>
+              <option>Other</option>
+            </select>
+            <div class="err">Please select a subject.</div>
+          </div>
+
+          <div class="field">
+            <label for="cMessage">Message</label>
+            <textarea id="cMessage" rows="6" placeholder="Tell us how we can help..." required></textarea>
+            <div class="err">Please write your message (min 10 chars).</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Send Message ✉️</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq">
+      <div class="section-head">
+        <span class="section-tag">FAQ</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">How do I enroll in a course? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>Browse the Learning page, click on any course, and hit "Enroll Now". For paid courses you'll be guided through checkout.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you offer refunds? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>Yes — we offer a 30-day money-back guarantee on all paid courses. No questions asked.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Will I get a certificate? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>Yes! Complete any course with at least 80% score and you'll receive an industry-recognized certificate.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I learn at my own pace? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>Absolutely. All courses come with lifetime access — learn whenever and wherever you want.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Are there any free courses? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>Yes, we have 50+ completely free courses, especially for beginners. Look for the "FREE" badge on the Learning page.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="color:white;"><span class="brand-logo">E</span> EduSphere</div>
+        <p>Empowering learners worldwide to master in-demand skills.</p>
+      </div>
+      <div><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="learning.html">Learning</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Categories</h4><ul><li><a href="#">Web Dev</a></li><li><a href="#">Data Science</a></li><li><a href="#">Design</a></li></ul></div>
+      <div><h4>Support</h4><ul><li><a href="contact.html">Help Center</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">© 2025 EduSphere. Built for BCA Project. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="js/auth.js"></script>
+<script>Auth.requireAuth();</script>
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+  });
+
+  // Contact form
+  const form = document.getElementById('contactForm');
+  const ok = document.getElementById('okAlert');
+  const err = document.getElementById('errAlert');
+
+  function setErr(el) { el.parentElement.classList.add('has-error'); }
+  function clearAll() {
+    document.querySelectorAll('.field').forEach(f => f.classList.remove('has-error'));
+    ok.classList.remove('show'); err.classList.remove('show');
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    clearAll();
+    const n = document.getElementById('cName');
+    const em = document.getElementById('cEmail');
+    const sb = document.getElementById('cSubject');
+    const ms = document.getElementById('cMessage');
+    let valid = true;
+    if (!n.value.trim()) { setErr(n); valid = false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)) { setErr(em); valid = false; }
+    if (!sb.value) { setErr(sb); valid = false; }
+    if (ms.value.trim().length < 10) { setErr(ms); valid = false; }
+    if (!valid) return;
+    ok.classList.add('show');
+    form.reset();
+    setTimeout(() => ok.classList.remove('show'), 5000);
+  });
+
+  // Pre-fill name/email from session
+  const s = Auth.getSession();
+  if (s) {
+    document.getElementById('cName').value = `${s.firstName} ${s.lastName}`;
+    document.getElementById('cEmail').value = s.email;
+  }
+</script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>
